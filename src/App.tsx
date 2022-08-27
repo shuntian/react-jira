@@ -6,8 +6,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          初始化项目配置<span>de</span>
-          
+          初始化项目配置
+          <span>de</span>ddeka
+
         </div>
         <div>nihao</div>
       </header>
