@@ -5,9 +5,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
         <div>初始化项目配置<span>de</span></div>
-        
+        <div>nihao</div>
+
       </header>
     </div>
   );
