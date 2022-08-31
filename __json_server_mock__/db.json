@@ -1,0 +1,33 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "name": "seatable",
+      "personId": "0006"
+    },
+    {
+      "id": "2",
+      "name": "seatable-app",
+      "personId": "0007"
+    },
+    {
+      "id": "3",
+      "name": "seatable-plugin",
+      "personId": "0008"
+    }
+  ],
+  "users": [
+    {
+      "id": "0006",
+      "name": "shuntian"
+    },
+    {
+      "id": "0007",
+      "name": "alex"
+    },
+    {
+      "id": "0008",
+      "name": "gg"
+    }
+  ]
+}
