@@ -1,5 +1,19 @@
+import { Users } from 'interfaces';
 import React from 'react';
-export default function SearchPanel({ param, setParam, users }) {
+
+interface SearchPanelProps {
+  param: {
+    name: string;
+    personId: string;
+  };
+  users: Users;
+  setParam: (param: SearchPanelProps['param']) => void;
+}
+export default function SearchPanel({
+  param,
+  setParam,
+  users,
+}: SearchPanelProps) {
   return (
     <form>
       <div>

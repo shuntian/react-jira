@@ -1,20 +1,22 @@
-const isFalsy = (val) => {
+const isFalsy = (val: any) => {
   return val === 0 ? false : !val;
 };
 
-export const cleanObject = (object) => {
+export const cleanObject = (object: object) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
+    // @ts-ignore
     if (isFalsy(result[key])) {
+      // @ts-ignore
       delete result[key];
     }
   });
   return result;
 };
 
-export const debounce = (fn, delay) => {
-  let timer = null;
-  return (...args) => {
+export const debounce = (fn: () => void, delay?: number) => {
+  let timer: null | NodeJS.Timeout = null;
+  return (...args: []) => {
     if (timer) {
       clearTimeout(timer);
       timer = null;
