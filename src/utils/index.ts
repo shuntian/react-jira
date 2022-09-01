@@ -1,4 +1,4 @@
-const isFalsy = (val: any) => {
+const isFalsy = (val: unknown) => {
   return val === 0 ? false : !val;
 };
 
