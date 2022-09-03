@@ -1,0 +1,38 @@
+import React, { ReactNode, useContext, useState } from 'react';
+import { AuthForm, User } from 'interfaces';
+import * as auth from '../auth-provider';
+
+const AuthContext = React.createContext<
+  | {
+      user: User | null;
+      login: (form: AuthForm) => Promise<void>;
+      register: (form: AuthForm) => Promise<void>;
+      logout: () => void;
+    }
+  | undefined
+>(undefined);
+AuthContext.displayName = 'AuthContext';
+
+export const AuthProdiver = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  const login = (form: AuthForm) => auth.login(form).then(setUser);
+  const register = (form: AuthForm) => auth.register(form).then(setUser);
+  const logout = () => auth.logout().then(() => setUser(null));
+
+  return (
+    <AuthContext.Provider
+      children={children}
+      value={{ user, login, register, logout }}
+    />
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth need used within AuthProdiver');
+  }
+
+  return context;
+};

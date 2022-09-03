@@ -1,30 +1,19 @@
-import React, { FormEvent, useCallback } from 'react';
+import React, { FormEvent } from 'react';
+import { useAuth } from 'contexts/auth-provider';
 
 import './style.css';
 
-const apiUrl = process.env.REACT_APP_API_URL;
 export const RegisterScreen = () => {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(param),
-    }).then(async (response: Response) => {
-      if (response.ok) {
-      }
-    });
-  };
+  const { register } = useAuth();
 
-  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
-  }, []);
+    register({ username, password });
+  };
 
   return (
     <div className="form-container">
