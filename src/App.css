@@ -5,8 +5,20 @@ body,
   height: 100%;
 }
 
-.App {
+.authenticated-app,
+.unauthenticated-app {
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+.unauthenticated-app {
+  flex-direction: column;
+  align-items: center;
+}
+
+.unauthenticated-app > button {
+  height: 40px;
+  width: 120px;
+  margin-bottom: 20px;
 }
