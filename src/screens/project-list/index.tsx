@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { cleanObject, debounce } from 'utils';
-import * as qs from 'qs';
+import { cleanObject } from 'utils';
 import List from './list';
 import SearchPanel from './search-panel';
 import { useDebounce, useMount } from 'utils/hooks';
+import { useHttp } from 'utils/http';
 
-const apiURL = process.env.REACT_APP_API_URL;
 export default function ProjectList() {
   const [param, setParam] = useState({ name: '', personId: '' });
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const debouncedValue = useDebounce(param, 500);
+  const client = useHttp();
 
   useMount(() => {
-    fetch(`${apiURL}/users`).then(async (response) => {
-      setUsers(await response.json());
-    });
+    client('users').then(setUsers);
   });
 
   useEffect(() => {
-    fetch(
-      `${apiURL}/projects?${qs.stringify(cleanObject(debouncedValue))}`
-    ).then(async (response) => {
-      setProjects(await response.json());
-    });
+    client('projects', cleanObject(debouncedValue)).then(setProjects);
+    // eslint-disable-next-line
   }, [debouncedValue]);
 
   return (
