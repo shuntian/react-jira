@@ -6,7 +6,7 @@ import { LoginScreen } from './login';
 import { RegisterScreen } from './register';
 
 export const UnauthenticatedApp = () => {
-  const [isRegister, setRegister] = useState(true);
+  const [isRegister, setRegister] = useState(false);
 
   const handleState = useCallback(() => {
     setRegister(!isRegister);

@@ -8,7 +8,8 @@ export const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
   if (token) {
-    user = await http('me', { token: token });
+    const data = await http('me', { token: token });
+    user = data.user;
   }
   return user;
 };
@@ -24,7 +25,7 @@ const AuthContext = React.createContext<
 >(undefined);
 AuthContext.displayName = 'AuthContext';
 
-export const AuthProdiver = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);

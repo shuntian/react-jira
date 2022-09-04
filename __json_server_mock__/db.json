@@ -3,17 +3,23 @@
     {
       "id": "1",
       "name": "seatable",
-      "personId": "0006"
+      "personId": "0006",
+      "department": "前端组",
+      "create": ""
     },
     {
       "id": "2",
       "name": "seatable-app",
-      "personId": "0007"
+      "personId": "0007",
+      "department": "应用组",
+      "created": ""
     },
     {
       "id": "3",
       "name": "seatable-plugin",
-      "personId": "0008"
+      "personId": "0008",
+      "department": "插件组",
+      "created": ""
     }
   ],
   "users": [

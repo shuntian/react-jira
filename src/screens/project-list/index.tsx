@@ -4,6 +4,7 @@ import List from './list';
 import SearchPanel from './search-panel';
 import { useDebounce, useMount } from 'utils/hooks';
 import { useHttp } from 'utils/http';
+import styled from '@emotion/styled';
 
 export default function ProjectList() {
   const [param, setParam] = useState({ name: '', personId: '' });
@@ -17,21 +18,19 @@ export default function ProjectList() {
   });
 
   useEffect(() => {
-    client('projects', cleanObject(debouncedValue)).then(setProjects);
+    client('projects', { data: cleanObject(debouncedValue) }).then(setProjects);
     // eslint-disable-next-line
   }, [debouncedValue]);
 
   return (
-    <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        maxWidth: '500px',
-      }}
-    >
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
       <List projects={projects} users={users} />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;

@@ -5,20 +5,20 @@ import * as auth from '../auth-provider';
 const apiUrl = process.env.REACT_APP_API_URL;
 interface Config extends RequestInit {
   token?: string;
-  data?: string;
+  data?: object;
 }
 export const http = (
   endpoint: string,
-  { token, headers, data, ...customeConfig }: Config = {}
+  { token, headers, data, ...customConfig }: Config = {}
 ) => {
   const config = {
     method: 'GET',
     headers: {
       Authorization: token ? `Bearer ${token}` : '',
-      'Content-Type': data ? 'applcation/json' : '',
+      'Content-Type': data ? 'application/json' : '',
       ...headers,
     },
-    ...customeConfig,
+    ...customConfig,
   };
   if (config.method.toUpperCase() === 'GET') {
     endpoint += `?${QueryString.stringify(data)}`;

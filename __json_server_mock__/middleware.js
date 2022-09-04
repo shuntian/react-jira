@@ -3,10 +3,8 @@ module.exports = (req, res, next) => {
     const { username, password } = req.body;
     if (username === 'alex' && password === '123456') {
       res.status(200).json({
-        user: {
-          name: username,
-          token: 'aaaaa',
-        },
+        name: username,
+        token: 'aaaaa',
       });
       return;
     } else {
@@ -17,10 +15,8 @@ module.exports = (req, res, next) => {
     const { username, password } = req.body;
     if (username && password) {
       res.status(200).json({
-        user: {
-          name: username,
-          token: 'aaaaa',
-        },
+        name: username,
+        token: 'aaaaa',
       });
       return;
     } else {
@@ -32,10 +28,8 @@ module.exports = (req, res, next) => {
   }
   if (req.method === 'GET' && req.path === '/me') {
     res.status(200).json({
-      user: {
-        name: 'alex',
-        token: 'aaaaa',
-      },
+      name: 'alex',
+      token: 'aaaaa',
     });
     return;
   }
