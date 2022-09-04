@@ -10,6 +10,7 @@ interface ListProps {
 export default function List({ projects, users }: ListProps) {
   return (
     <Table
+      rowKey={'id'}
       pagination={false}
       columns={[
         {
@@ -20,13 +21,10 @@ export default function List({ projects, users }: ListProps) {
           title: '负责人',
           render: (value, project) => {
             return (
-              <tr key={project.id}>
-                <td>{project.name}</td>
-                <td>
-                  {users.find((user) => user.id === project.personId)?.name ||
-                    '未知'}
-                </td>
-              </tr>
+              <>
+                {users.find((user) => user.id === project.personId)?.name ||
+                  '未知'}
+              </>
             );
           },
         },

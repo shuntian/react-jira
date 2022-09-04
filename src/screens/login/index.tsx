@@ -1,17 +1,13 @@
 import React, { FormEvent } from 'react';
 import { useAuth } from 'contexts/auth-provider';
 import { Button, Form, Input } from 'antd';
+import styled from '@emotion/styled';
 
 export const LoginScreen = () => {
   const { login } = useAuth();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const username = (event.currentTarget.elements[0] as HTMLInputElement)
-      .value;
-    const password = (event.currentTarget.elements[1] as HTMLInputElement)
-      .value;
-    login({ username, password });
+  const handleSubmit = (value: { username: string; password: string }) => {
+    login(value);
   };
 
   return (
@@ -25,8 +21,7 @@ export const LoginScreen = () => {
           },
         ]}
       >
-        <label htmlFor="username">用户名:</label>{' '}
-        <Input type="text" id="username"></Input>
+        <Input placeholder="用户名" type="text" id="username"></Input>
       </Form.Item>
       <Form.Item
         name="password"
@@ -37,14 +32,17 @@ export const LoginScreen = () => {
           },
         ]}
       >
-        <label htmlFor="password">密 &nbsp;&nbsp;&nbsp;码:</label>{' '}
-        <Input type="password" id="password"></Input>
+        <Input.Password placeholder="密码" id="password"></Input.Password>
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" type="primary">
+        <LongButton htmlType="submit" type="primary">
           登录
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   );
 };
+
+export const LongButton = styled(Button)`
+  width: 100%;
+`;
