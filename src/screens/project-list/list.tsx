@@ -1,14 +1,13 @@
 import React from 'react';
-import { Projects, User, Users } from 'interfaces';
-import { Table } from 'antd';
+import { Project, User, Users } from 'interfaces';
+import { Table, TableProps } from 'antd';
 import dayjs from 'dayjs';
 
-interface ListProps {
-  projects: Projects;
+interface ListProps extends TableProps<Project> {
   users: Users;
 }
 
-export default function List({ projects, users }: ListProps) {
+export default function List({ users, ...props }: ListProps) {
   return (
     <Table
       rowKey={'id'}
@@ -47,7 +46,7 @@ export default function List({ projects, users }: ListProps) {
           },
         },
       ]}
-      dataSource={projects}
+      {...props}
     />
   );
 }

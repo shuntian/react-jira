@@ -5,6 +5,7 @@ import SearchPanel from './search-panel';
 import { useDebounce, useMount } from 'utils/hooks';
 import { useHttp } from 'utils/http';
 import styled from '@emotion/styled';
+import { Typography } from 'antd';
 
 export default function ProjectList() {
   const [param, setParam] = useState({ name: '', personId: '' });
@@ -13,12 +14,24 @@ export default function ProjectList() {
   const debouncedValue = useDebounce(param, 500);
   const client = useHttp();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
   useMount(() => {
     client('users').then(setUsers);
   });
 
   useEffect(() => {
-    client('projects', { data: cleanObject(debouncedValue) }).then(setProjects);
+    setIsLoading(true);
+    client('projects', { data: cleanObject(debouncedValue) })
+      .then(setProjects)
+      .catch((error) => {
+        setProjects([]);
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
     // eslint-disable-next-line
   }, [debouncedValue]);
 
@@ -26,7 +39,12 @@ export default function ProjectList() {
     <Container>
       <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
-      <List projects={projects} users={users} />
+      {error ? (
+        <Typography.Text style={{ marginBottom: '1rem' }} type="danger">
+          {error?.message}
+        </Typography.Text>
+      ) : null}
+      <List loading={isLoading} dataSource={projects} users={users} />
     </Container>
   );
 }

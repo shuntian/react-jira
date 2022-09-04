@@ -33,11 +33,10 @@ export const http = (
         window.location.reload();
         return Promise.reject({ message: 'please login again' });
       }
-      const data = await response.json();
       if (response.ok) {
-        return data;
+        return await response.json();
       } else {
-        return Promise.reject(data);
+        return Promise.reject(await response.json());
       }
     });
 };
