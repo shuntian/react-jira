@@ -1,9 +1,9 @@
 import { Divider } from 'antd';
 import Card from 'antd/lib/card/Card';
 import { useCallback, useState } from 'react';
-import { LoginScreen } from 'screens/login';
-import { RegisterScreen } from 'screens/register';
 import styled from '@emotion/styled';
+import { LoginScreen } from './login';
+import { RegisterScreen } from './register';
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setRegister] = useState(true);
