@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  useContext,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 import { AuthForm, User } from 'interfaces';
 import * as auth from '../auth-provider';
 import { useMount } from 'utils/hooks';
@@ -31,7 +25,6 @@ const AuthContext = React.createContext<
 AuthContext.displayName = 'AuthContext';
 
 export const AuthProdiver = ({ children }: { children: ReactNode }) => {
-  const app = useRef(false);
   const [user, setUser] = useState<User | null>(null);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
@@ -41,13 +34,8 @@ export const AuthProdiver = ({ children }: { children: ReactNode }) => {
   useMount(() => {
     bootstrapUser().then((user) => {
       setUser(user);
-      app.current = true;
     });
   });
-
-  if (!app.current) {
-    return <div>loading...</div>;
-  }
 
   return (
     <AuthContext.Provider

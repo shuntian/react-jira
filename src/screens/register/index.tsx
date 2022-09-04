@@ -1,33 +1,49 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { useAuth } from 'contexts/auth-provider';
-
-import './style.css';
+import { Button, Form, Input } from 'antd';
 
 export const RegisterScreen = () => {
   const { register } = useAuth();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const username = (event.currentTarget.elements[0] as HTMLInputElement)
-      .value;
-    const password = (event.currentTarget.elements[1] as HTMLInputElement)
-      .value;
+  const handleSubmit = ({
+    username,
+    password,
+  }: {
+    username: string;
+    password: string;
+  }) => {
     register({ username, password });
   };
 
   return (
-    <div className="form-container">
-      <form className="form regisetr-form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">用户名:</label>{' '}
-          <input type="text" id="username"></input>
-        </div>
-        <div>
-          <label htmlFor="password">密 &nbsp;&nbsp;&nbsp;码:</label>{' '}
-          <input type="password" id="password"></input>
-        </div>
-        <button type="submit">注册</button>
-      </form>
-    </div>
+    <Form onFinish={handleSubmit}>
+      <Form.Item
+        name={'username'}
+        rules={[
+          {
+            required: true,
+            message: '名称是必填项',
+          },
+        ]}
+      >
+        <Input placeholder="用户名" type="text" id="username"></Input>
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: '密码是必填项',
+          },
+        ]}
+      >
+        <Input.Password placeholder="密码" id="password"></Input.Password>
+      </Form.Item>
+      <Form.Item>
+        <Button htmlType="submit" type="primary">
+          注册
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };

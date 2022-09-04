@@ -27,8 +27,7 @@ export default function ProjectList() {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        maxWidth: '500px',
       }}
     >
       <SearchPanel param={param} setParam={setParam} users={users} />

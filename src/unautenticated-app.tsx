@@ -1,3 +1,5 @@
+import { Button } from 'antd';
+import Card from 'antd/lib/card/Card';
 import { useCallback, useState } from 'react';
 import { LoginScreen } from 'screens/login';
 import { RegisterScreen } from 'screens/register';
@@ -11,10 +13,12 @@ export const UnauthenticatedApp = () => {
 
   return (
     <div className="unauthenticated-app">
-      {isRegisetr ? <LoginScreen /> : <RegisterScreen />}
-      <button onClick={handleState}>
-        {isRegisetr ? 'goto注册' : 'goto登录'}
-      </button>
+      <Card>
+        {isRegisetr ? <LoginScreen /> : <RegisterScreen />}
+        <Button onClick={handleState}>
+          {isRegisetr ? 'goto注册' : 'goto登录'}
+        </Button>
+      </Card>
     </div>
   );
 };

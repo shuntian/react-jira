@@ -3,6 +3,8 @@ import { useAuth } from 'contexts/auth-provider';
 import { AuthenticatedApp } from 'authenticated-app';
 import { UnauthenticatedApp } from 'unautenticated-app';
 
+import 'antd/dist/antd.less';
+
 import './App.css';
 
 function App() {

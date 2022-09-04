@@ -1,7 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useAuth } from 'contexts/auth-provider';
-
-import './style.css';
+import { Button, Form, Input } from 'antd';
 
 export const LoginScreen = () => {
   const { login } = useAuth();
@@ -16,18 +15,36 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div className="form-container">
-      <form className="form login-form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">用户名:</label>{' '}
-          <input type="text" id="username"></input>
-        </div>
-        <div>
-          <label htmlFor="password">密 &nbsp;&nbsp;&nbsp;码:</label>{' '}
-          <input type="password" id="password"></input>
-        </div>
-        <button type="submit">登录</button>
-      </form>
-    </div>
+    <Form onFinish={handleSubmit}>
+      <Form.Item
+        name={'username'}
+        rules={[
+          {
+            required: true,
+            message: '名称是必填项',
+          },
+        ]}
+      >
+        <label htmlFor="username">用户名:</label>{' '}
+        <Input type="text" id="username"></Input>
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: '密码是必填项',
+          },
+        ]}
+      >
+        <label htmlFor="password">密 &nbsp;&nbsp;&nbsp;码:</label>{' '}
+        <Input type="password" id="password"></Input>
+      </Form.Item>
+      <Form.Item>
+        <Button htmlType="submit" type="primary">
+          登录
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };

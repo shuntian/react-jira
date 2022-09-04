@@ -13,12 +13,6 @@ body,
 }
 
 .unauthenticated-app {
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-
-.unauthenticated-app > button {
-  height: 40px;
-  width: 120px;
-  margin-bottom: 20px;
 }
