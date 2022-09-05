@@ -15,6 +15,12 @@ module.exports = (req, res, next) => {
   }
   if (req.method === 'POST' && req.path === '/register') {
     const { username, password } = req.body;
+    if (username === 'aaa') {
+      res.status(400).json({
+        message: '用户名已存在',
+      });
+      return;
+    }
     if (username && password) {
       res.status(200).json({
         user: {

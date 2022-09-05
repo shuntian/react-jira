@@ -19,7 +19,7 @@ const AuthContext = React.createContext<
       user: User | null;
       login: (form: AuthForm) => Promise<void>;
       register: (form: AuthForm) => Promise<void>;
-      logout: () => void;
+      logout: () => Promise<void>;
     }
   | undefined
 >(undefined);

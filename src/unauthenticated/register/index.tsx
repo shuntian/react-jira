@@ -3,17 +3,22 @@ import { useAuth } from 'contexts/auth-provider';
 import { Form, Input } from 'antd';
 import { LongButton } from '../login';
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({
+  onError,
+}: {
+  onError: (error: Error) => void;
+}) => {
   const { register } = useAuth();
 
-  const handleSubmit = ({
-    username,
-    password,
-  }: {
+  const handleSubmit = async (values: {
     username: string;
     password: string;
   }) => {
-    register({ username, password });
+    try {
+      await register(values);
+    } catch (error) {
+      onError(error as Error);
+    }
   };
 
   return (
