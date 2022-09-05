@@ -1,7 +1,7 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import { AuthForm, User } from 'interfaces';
 import * as auth from '../auth-provider';
-import { useMount } from 'utils/hooks';
+import { useAsync, useMount } from 'utils/hooks';
 import { http } from 'utils/http';
 
 export const bootstrapUser = async () => {
@@ -26,17 +26,26 @@ const AuthContext = React.createContext<
 AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const {
+    run,
+    isIdle,
+    isLoading,
+    data: user,
+    setData: setUser,
+  } = useAsync<User | null>();
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
 
-  useMount(() => {
-    bootstrapUser().then((user) => {
-      setUser(user);
-    });
+  useMount(async () => {
+    const user = await run(bootstrapUser());
+    setUser(user);
   });
+
+  if (isIdle || isLoading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <AuthContext.Provider
