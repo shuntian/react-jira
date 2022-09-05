@@ -3,6 +3,7 @@ import { AuthForm, User } from 'interfaces';
 import * as auth from '../auth-provider';
 import { useAsync, useMount } from 'utils/hooks';
 import { http } from 'utils/http';
+import { FullPageErrorCallback, FullPageLoading } from 'components/lib';
 
 export const bootstrapUser = async () => {
   let user = null;
@@ -30,6 +31,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     run,
     isIdle,
     isLoading,
+    isError,
+    error,
     data: user,
     setData: setUser,
   } = useAsync<User | null>();
@@ -38,13 +41,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
 
-  useMount(async () => {
-    const user = await run(bootstrapUser());
-    setUser(user);
+  useMount(() => {
+    run(bootstrapUser());
   });
 
   if (isIdle || isLoading) {
-    return <div>loading...</div>;
+    return <FullPageLoading />;
+  }
+
+  if (isError) {
+    return <FullPageErrorCallback error={error} />;
   }
 
   return (

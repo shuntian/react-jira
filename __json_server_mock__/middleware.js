@@ -38,12 +38,16 @@ module.exports = (req, res, next) => {
     }
   }
   if (req.method === 'GET' && req.path === '/me') {
-    res.status(200).json({
-      user: {
-        name: 'alex',
-        token: 'aaaaa',
-      },
-    });
+    if (Math.random() * 10 < 8) {
+      res.status(200).json({
+        user: {
+          name: 'alex',
+          token: 'aaaaa',
+        },
+      });
+      return;
+    }
+    res.status(500).json({ message: '服务器异常, 正在抢修, 请稍后...' });
     return;
   }
   next();
