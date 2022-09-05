@@ -45,6 +45,27 @@ export const RegisterScreen = ({
       >
         <Input.Password placeholder="密码" id="password"></Input.Password>
       </Form.Item>
+      <Form.Item
+        name="password2"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('两次输入密码不匹配!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password placeholder="确认密码" id="password2"></Input.Password>
+      </Form.Item>
       <Form.Item>
         <LongButton htmlType="submit" type="primary">
           注册

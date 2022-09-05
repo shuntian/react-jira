@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from 'contexts/auth-provider';
 import { Button, Form, Input } from 'antd';
 import styled from '@emotion/styled';
+import { useAsync } from 'utils/hooks';
 
 export const LoginScreen = ({
   onError,
@@ -9,13 +10,14 @@ export const LoginScreen = ({
   onError: (error: Error) => void;
 }) => {
   const { login } = useAuth();
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
   const handleSubmit = async (values: {
     username: string;
     password: string;
   }) => {
     try {
-      await login(values);
+      await run(login(values));
     } catch (error) {
       onError(error as Error);
     }
@@ -46,7 +48,7 @@ export const LoginScreen = ({
         <Input.Password placeholder="密码" id="password"></Input.Password>
       </Form.Item>
       <Form.Item>
-        <LongButton htmlType="submit" type="primary">
+        <LongButton loading={isLoading} htmlType="submit" type="primary">
           登录
         </LongButton>
       </Form.Item>
