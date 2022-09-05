@@ -1,4 +1,4 @@
-import { Divider } from 'antd';
+import { Button, Divider } from 'antd';
 import Card from 'antd/lib/card/Card';
 import { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
@@ -19,9 +19,9 @@ export const UnauthenticatedApp = () => {
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
         {isRegister ? <RegisterScreen /> : <LoginScreen />}
         <Divider />
-        <a onClick={handleState}>
+        <Button type={'link'} onClick={handleState}>
           {isRegister ? '已有账号了?直接登录' : '没有账号?注册新账号'}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   );

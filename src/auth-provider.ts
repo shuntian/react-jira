@@ -1,4 +1,3 @@
-import { http } from 'utils/http';
 import { AuthForm, User } from './interfaces/index';
 
 const apiUrl = process.env.REACT_APP_API_URL;

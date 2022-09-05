@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { useAuth } from 'contexts/auth-provider';
 import { Button, Form, Input } from 'antd';
 import styled from '@emotion/styled';

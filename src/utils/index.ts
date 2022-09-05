@@ -1,8 +1,8 @@
-const isFalsy = (val: unknown) => {
+export const isFalsy = (val: unknown) => {
   return val === 0 ? false : !val;
 };
 
-const isVoid = (val: unknown) => {
+export const isVoid = (val: unknown) => {
   return val === undefined || val === null || val === '';
 };
 
