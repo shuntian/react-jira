@@ -116,7 +116,9 @@ export const useDocumentTitle = (
 
   useEffect(() => {
     document.title = title;
+  });
 
+  useEffect(() => {
     return () => {
       if (keepOnUnmount) {
         document.title = oldTitle;
