@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { cleanObject } from 'utils';
+import React, { useState } from 'react';
 import List from './list';
 import SearchPanel from './search-panel';
-import { useDebounce } from 'utils/hooks';
+import { useDebounce, useDocumentTitle } from 'utils/hooks';
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
 import { useProjects, useUsers } from './hooks';
@@ -13,6 +12,7 @@ export default function ProjectList() {
 
   const { data: users } = useUsers();
   const { isLoading, error, data: projects } = useProjects(debouncedValue);
+  useDocumentTitle('项目列表');
 
   return (
     <Container>

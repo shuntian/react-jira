@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useMount = (callback: () => void) => {
   useEffect(() => {
@@ -106,4 +106,21 @@ export const useAsync = <D>(
     setError,
     ...state,
   };
+};
+
+export const useDocumentTitle = (
+  title: string,
+  keepOnUnmount: boolean = true
+) => {
+  const oldTitle = useRef(document.title).current;
+
+  useEffect(() => {
+    document.title = title;
+
+    return () => {
+      if (keepOnUnmount) {
+        document.title = oldTitle;
+      }
+    };
+  }, [title, keepOnUnmount]);
 };

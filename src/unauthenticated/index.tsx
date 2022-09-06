@@ -4,10 +4,13 @@ import { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import { LoginScreen } from './login';
 import { RegisterScreen } from './register';
+import { useDocumentTitle } from 'utils/hooks';
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+
+  useDocumentTitle('jira 任务管理系统');
 
   const handleState = useCallback(() => {
     setRegister(!isRegister);
