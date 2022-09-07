@@ -116,7 +116,7 @@ export const useDocumentTitle = (
 
   useEffect(() => {
     document.title = title;
-  });
+  }, []);
 
   useEffect(() => {
     return () => {
