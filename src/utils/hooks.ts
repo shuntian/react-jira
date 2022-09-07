@@ -116,7 +116,7 @@ export const useDocumentTitle = (
 
   useEffect(() => {
     document.title = title;
-  }, []);
+  }, [title]);
 
   useEffect(() => {
     return () => {
@@ -124,5 +124,5 @@ export const useDocumentTitle = (
         document.title = oldTitle;
       }
     };
-  }, [title, keepOnUnmount]);
+  }, [oldTitle, keepOnUnmount]);
 };

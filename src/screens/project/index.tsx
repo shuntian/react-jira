@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { EpicScreen } from 'screens/epic';
 import { KanbanScreen } from 'screens/kanban';

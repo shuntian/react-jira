@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button, Dropdown, Menu } from 'antd';
 import { Row } from 'components/lib';
 import { useAuth } from 'contexts/auth-provider';
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ProjectScreen } from 'screens/project';
 import ProjectList from 'screens/project-list';
