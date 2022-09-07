@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ProjectScreen } from 'screens/project';
 import ProjectList from 'screens/project-list';
+import { gotoHome } from 'utils';
 
 export const AuthenticatedApp = () => {
   return (
@@ -32,7 +33,11 @@ const AppHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={3}>
-        <h2>Logo</h2>
+        <h2>
+          <Button type={'link'} onClick={gotoHome}>
+            Logo
+          </Button>
+        </h2>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>

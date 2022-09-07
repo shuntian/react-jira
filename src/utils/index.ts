@@ -28,3 +28,7 @@ export const debounce = (fn: () => void, delay?: number) => {
     }, delay || 1000);
   };
 };
+
+export const gotoHome = (): void => {
+  window.location.href = window.location.origin;
+};
