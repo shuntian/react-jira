@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import List from './list';
 import SearchPanel from './search-panel';
-import { useDebounce, useDocumentTitle } from 'utils/hooks';
+import { useDebounce, useDocumentTitle, useUrlQueryParam } from 'utils/hooks';
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
 import { useProjects, useUsers } from './hooks';
 
 export default function ProjectList() {
-  const [param, setParam] = useState({ name: '', personId: '' });
+  // const [, setParam] = useState({ name: '', personId: '' });
+  const [param, setParam] = useUrlQueryParam(['name', 'personId']);
   const debouncedValue = useDebounce(param, 500);
 
   const { data: users } = useUsers();

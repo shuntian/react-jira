@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { cleanObject } from './index';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { URLSearchParamsInit, useSearchParams } from 'react-router-dom';
 
 export const useMount = (callback: () => void) => {
   useEffect(() => {
@@ -125,4 +127,24 @@ export const useDocumentTitle = (
       }
     };
   }, [oldTitle, keepOnUnmount]);
+};
+
+export const useUrlQueryParam = <K extends string>(keys: K[]) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const params = useMemo(() => {
+    return keys.reduce((prev, key) => {
+      return { ...prev, [key]: searchParams.get(key) || '' };
+    }, {} as { [key in K]: string });
+    // eslint-disable-next-line  react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  return [
+    params,
+    (params: Partial<{ [key in K]: unknown }>) => {
+      // iterator
+      const o = cleanObject({ ...Object.fromEntries(searchParams), ...params });
+      return setSearchParams(o as URLSearchParamsInit);
+    },
+  ] as const;
 };

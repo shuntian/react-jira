@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { AuthForm, User } from 'interfaces';
 import * as auth from '../auth-provider';
 import { useAsync, useMount } from 'utils/hooks';
