@@ -1,38 +1,38 @@
 {
   "projects": [
     {
-      "id": "1",
+      "id": 1,
       "name": "seatable",
-      "personId": "0006",
+      "personId": 666,
       "department": "前端组",
       "create": ""
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "seatable-app",
-      "personId": "0007",
+      "personId": 777,
       "department": "应用组",
       "created": ""
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "seatable-plugin",
-      "personId": "0008",
+      "personId": 888,
       "department": "插件组",
       "created": ""
     }
   ],
   "users": [
     {
-      "id": "0006",
+      "id": 666,
       "name": "shuntian"
     },
     {
-      "id": "0007",
+      "id": 777,
       "name": "alex"
     },
     {
-      "id": "0008",
+      "id": 888,
       "name": "gg"
     }
   ]

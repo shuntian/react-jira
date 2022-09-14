@@ -1,13 +1,13 @@
 export interface Project {
-  id: string;
+  id: number;
   name: string;
-  personId: string;
+  personId: number;
   department: string;
   created: number;
 }
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   token?: string;
 }
